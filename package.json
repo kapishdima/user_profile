@@ -1,0 +1,52 @@
+{
+    "private": true,
+    "scripts": {
+        "hot": "yarn clear:front && vite",
+        "prod": "yarn clear:front && vite build",
+        "hot-admin": "yarn clear:admin && vite --config vite.admin.config.ts",
+        "prod-admin": "yarn clear:admin && vite build --config vite.admin.config.ts",
+        "clear:admin": "rm -rf public/build/admin",
+        "clear:front": "rm -rf public/build/front"
+    },
+    "devDependencies": {
+        "@types/node": "^18.7.18",
+        "@types/react": "18.0.17",
+        "@types/react-dom": "^17.0.3",
+        "@types/react-table": "^7.7.12",
+        "@vitejs/plugin-react": "^2.1.0",
+        "laravel-vite-plugin": "^0.6.0",
+        "react-refresh": "^0.14.0",
+        "sass": "^1.15.2",
+        "typescript": "^4.2.4",
+        "vite": "^3.1.3"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "^2.9.3",
+        "@toast-ui/react-editor": "^2.2.0",
+        "ace-builds": "^1.4.8",
+        "axios": "^0.19",
+        "classnames": "^2.2.6",
+        "evergreen-ui": "^6.10.3",
+        "gsap": "^3.3.4",
+        "imask": "^6.4.2",
+        "intl-tel-input": "^17.0.18",
+        "lite-youtube-embed": "^0.2.0",
+        "lodash": "^4.17.15",
+        "medium-editor": "^5.23.3",
+        "mobx": "^6.6.1",
+        "mobx-react": "^7.5.1",
+        "react": "^18.2.0",
+        "react-ace": "^10.1.0",
+        "react-dom": "^18.2.0",
+        "react-error-boundary": "^3.1.4",
+        "react-hook-form": "^7.33.1",
+        "react-lazyload": "^3.2.0",
+        "react-query": "^3.39.1",
+        "react-router-dom": "^6.3.0",
+        "react-table": "^7.8.0",
+        "split-type": "^0.3.2",
+        "swiper": "^8.4.0",
+        "three": "^0.143.0",
+        "yup": "^0.32.11"
+    }
+}

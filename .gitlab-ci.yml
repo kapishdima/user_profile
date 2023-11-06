@@ -1,0 +1,79 @@
+image: lorisleiva/laravel-docker:stable
+services:
+  - postgres:latest
+variables:
+  POSTGRES_PASSWORD: secret
+  POSTGRES_USER: default
+  POSTGRES_DB: default
+
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+    - if: $CI_COMMIT_BRANCH == 'master'
+    - if: $CI_COMMIT_BRANCH == 'dev'
+
+stages:
+  - build
+  - test
+  - dusk
+
+before_script:
+  - git config user.email "ci@wnary.com.ua"
+  - git config user.name "CI"
+  - git remote remove ssh_origin || true # Local repo state may be cached
+  - git remote add ssh_origin "git@$CI_SERVER_HOST:$CI_PROJECT_PATH.git"
+
+build:
+  stage: build
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - node -v
+    - npm -v
+    - npm install
+    - npm run prod
+    - npm run prod-admin
+    - echo 'Smth'
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - vendor
+      - node_modules
+  only:
+    - merge_requests
+    - master
+    - dev
+php_test:
+  stage: test
+  script:
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts
+    - cp .env.gitlab-ci .env
+    - php artisan key:generate
+    - vendor/bin/pest
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - vendor
+
+codestyle:
+  stage: test
+  cache: {}
+  script:
+    - vendor/bin/php-cs-fixer fix
+    - git add .
+    - git commit -m "CI PHP CS FIXER auto commit enjoy!"
+    - git push ssh_origin HEAD:$CI_BUILD_REF_NAME
+
+front_test:
+  stage: test
+  script:
+    - echo "front_test job"
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - vendor
+      - node_modules
+
+dusk_test:
+  stage: dusk
+  script:
+    - echo "dusk test"

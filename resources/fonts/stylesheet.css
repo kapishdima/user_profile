@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Soyuz Grotesk';
+    src: url('SoyuzGrotesk-Bold.eot');
+    src: url('SoyuzGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+        url('SoyuzGrotesk-Bold.woff2') format('woff2'),
+        url('SoyuzGrotesk-Bold.woff') format('woff'),
+        url('SoyuzGrotesk-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+

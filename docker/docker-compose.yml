@@ -1,0 +1,78 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: ./dockerfiles/Nginx
+      args:
+        - PUID=${WORKSPACE_PUID}
+        - PGID=${WORKSPACE_PGID}
+    volumes:
+      - ./configs/fakel.conf:/etc/nginx/sites-available/default.conf
+      - ../:/var/www/fakel:delegated
+    depends_on:
+      - php-fpm
+    ports:
+      - "80:80"
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - "10007:5432"
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: default
+      POSTGRES_DB: default
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - ./storage/redis/data:/data
+    ports:
+      - "10004:6379"
+  php-fpm:
+    build:
+      context: ./dockerfiles/PHP
+      args:
+        - PUID=${WORKSPACE_PUID}
+        - PGID=${WORKSPACE_PGID}
+    expose:
+      - "9000"
+    volumes:
+      - ./dockerfiles/PHP/php.ini:/usr/local/etc/php/php.ini
+      - ../:/var/www/fakel:delegated
+    depends_on:
+      - workspace
+  workspace:
+    build:
+      context: ./dockerfiles/Workspace
+      args:
+        - PUID=${WORKSPACE_PUID}
+        - PGID=${WORKSPACE_PGID}
+    volumes:
+      - ../:/app
+    tty: true
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:latest
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+  firefox:
+    image: selenium/node-firefox:latest
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
