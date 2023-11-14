@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Notification;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasFactory;
     use Notifiable;
+    use HasApiTokens;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +22,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
+        'phone',
+        'user_document_id',
+        'avatar_id',
+        'email_verified_at',
     ];
 
     /**
@@ -41,4 +50,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+     /**
+     * Route notifications for the Vonage channel.
+     */
+    public function routeNotificationForVonage(Notification $notification): string
+    {
+        return $this->phone_number;
+    }
+
+    public function userDocuments() {
+        return $this->hasMany(UserDocument::class);
+    }
+
+    public function avatar() {
+        return $this->belongsTo(Media::class);
+    }
 }

@@ -45,7 +45,7 @@
 
 
     @viteReactRefresh
-    {{ useAdminAssets() }}
+    {{ useJsAssets() }}
 </body>
 
 </html>

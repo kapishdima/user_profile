@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\Cache\CacheService;
-use App\Services\Cache\CacheServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(CacheServiceInterface::class, CacheService::class);
     }
 
     /**
@@ -26,5 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+
     }
 }

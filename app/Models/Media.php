@@ -43,13 +43,5 @@ class Media extends Model
         });
     }
 
-    public function translated()
-    {
-        return $this->getTranslatables(self::TRANSLATABLE);
-    }
 
-    public function translations()
-    {
-        return $this->morphMany(Translation::class, 'translatable');
-    }
 }
