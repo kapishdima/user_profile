@@ -5,6 +5,7 @@ import { EmailVerificationPage } from "./pages/EmailVerificationPage";
 import { TwoFactorAuthPage } from "./pages/TwoFactorAuthPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { EmailVerificationResetPage } from "./pages/EmailVerificationResetPage";
+import { ResetPasswordSuccess } from "./pages/ResetPasswordSuccess";
 
 import { getToken } from "./api/auth.api";
 import { useAuthStore } from "./store/auth.store";
@@ -23,4 +24,5 @@ export {
     SignUpPage,
     ResetPasswordPage,
     EmailVerificationResetPage,
+    ResetPasswordSuccess,
 };

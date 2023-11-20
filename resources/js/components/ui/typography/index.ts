@@ -7,6 +7,8 @@ import { Small } from "./Small";
 import { Muted } from "./Muted";
 import { Details } from "./Details";
 import { Subtitle } from "./Subtitle";
+import { Terms } from "./Terms";
+import { Link } from "./Link";
 
 export const Typography = {
     Heading1,
@@ -18,4 +20,6 @@ export const Typography = {
     Muted,
     Details,
     Subtitle,
+    Terms,
+    Link,
 };

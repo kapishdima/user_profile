@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::view('/panels/{path?}', 'backoffice.admin')->where('path', '.*');
+Route::view('/{path?}', 'backoffice.admin')->where("path", '^(?!storage).*$');
 
-Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()], function () {
-    Route::get('/', [HomeController::class, 'index']);
-});
+// Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()], function () {
+//     Route::get('/', [HomeController::class, 'index']);
+// });

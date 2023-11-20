@@ -53,10 +53,10 @@ export const Input: React.FC<InputProps> = ({
                         </FormLabel>
                     )}
                     <FormControl>{children(inputProps)}</FormControl>
+                    <FormMessage className="font-normal" />
                     {Boolean(description) && (
                         <FormDescription>{description}</FormDescription>
                     )}
-                    <FormMessage className="font-normal" />
                 </FormItem>
             )}
         />

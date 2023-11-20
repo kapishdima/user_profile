@@ -6,6 +6,7 @@ import {
     EmailVerificationResetPage,
     LoginPage,
     ResetPasswordPage,
+    ResetPasswordSuccess,
     SignUpPage,
     SignUpPhoneVerificationPage,
     TwoFactorAuthPage,
@@ -40,6 +41,7 @@ export enum AppRoutes {
     PROFILE_ACTIONS = "/profile/settings/actions",
     PROFILE_DOCUMENTS = "/profile/settings/documents",
     RESET_PASSWORD = "/profile/reset-password",
+    RESET_PASSWORD_SUCCESS = "/profile/reset-password/success",
     VERIFY_RESET_CODE = "/profile/verify-reset-password",
 }
 
@@ -102,6 +104,10 @@ export const authRoutes: Route[] = [
     {
         path: AppRoutes.VERIFY_RESET_CODE,
         element: () => <EmailVerificationResetPage />,
+    },
+    {
+        path: AppRoutes.RESET_PASSWORD_SUCCESS,
+        element: () => <ResetPasswordSuccess />,
     },
 
     { path: "*", element: () => <Navigate to={AppRoutes.LOGIN} replace /> },

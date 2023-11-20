@@ -8,7 +8,7 @@ export const App: React.FC = () => {
     return (
         <>
             <HttpProvider>
-                <BrowserRouter basename="/panels">
+                <BrowserRouter>
                     <AppRouterProvider />
                 </BrowserRouter>
             </HttpProvider>

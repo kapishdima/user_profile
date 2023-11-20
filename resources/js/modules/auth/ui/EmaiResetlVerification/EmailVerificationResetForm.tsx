@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "@/components/ui/button/index";
+import { Button, SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 
@@ -8,9 +8,12 @@ import { emailVerificationSchema } from "../../validation/schema";
 import { EmailVerification } from "./EmailVerification";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/config/routes";
+import { useEmailVerificationCode } from "../../store/email-verification.store";
 
 export const EmailVerificationResetForm: React.FC = () => {
     const navigate = useNavigate();
+
+    const sended = useEmailVerificationCode((state) => state.sended);
 
     const defaultValues: OnSubmitValues<typeof emailVerificationSchema> = {
         email: "",
@@ -30,6 +33,7 @@ export const EmailVerificationResetForm: React.FC = () => {
                 <EmailVerification />
 
                 <Button
+                    disabled={!sended}
                     type="button"
                     onClick={() => navigate(AppRoutes.RESET_PASSWORD)}
                 >

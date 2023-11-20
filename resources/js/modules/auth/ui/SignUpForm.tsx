@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AppRoutes } from "@/app/config/routes";
 import { Button } from "@/components/ui/button/index";
@@ -33,11 +33,14 @@ export const SignUpForm: React.FC = () => {
             <Typography.Heading3 classes="text-center">
                 Создать аккаунт
             </Typography.Heading3>
-            <Typography.Small classes="text-center mb-6">
+            <Typography.Small classes="text-center mb-6 text-slate-400">
                 Уже есть аккаунт?{" "}
-                <Button variant="link" className="p-0" asChild>
-                    <Link to={AppRoutes.LOGIN}>Войти</Link>
-                </Button>
+                <Typography.Link
+                    to={AppRoutes.LOGIN}
+                    className="text-black font-medium"
+                >
+                    Войти
+                </Typography.Link>
             </Typography.Small>
             <Form
                 handleSubmit={onSubmit}
@@ -68,6 +71,7 @@ export const SignUpForm: React.FC = () => {
                 <Button className="w-full" type="submit" loading={loading}>
                     Создать аккаунт
                 </Button>
+                <Typography.Terms />
             </Form>
         </div>
     );

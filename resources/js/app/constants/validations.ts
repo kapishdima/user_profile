@@ -1,4 +1,6 @@
 export const MIN_FIRST_NAME = "Имя должно быть больше одного символа";
 export const MIN_LAST_NAME = "Фамилия должно быть больше одного символа";
-export const EMAIL_INVALID = "Неверный формат электронной почты";
 export const PASSWORD_MISMATCH = "Пароли не совпадают";
+export const MIN_PASSWORD = "Пароль должен содержать минимум 8 символов";
+export const INVALID_EMAIL = "Неверный формат email";
+export const INVALID_PHONE = "Неверный формат телефона";

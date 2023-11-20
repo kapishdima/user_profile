@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import React from "react";
 
 import { TextInput } from "@/components/ui/fields";
 import { useEmailVerificationCode } from "@/modules/auth";
+import { useFormContext } from "react-hook-form";
 
 export const EmailVerification: React.FC = () => {
     const form = useFormContext();
 
     const sended = useEmailVerificationCode((state) => state.sended);
+    const verified = useEmailVerificationCode((state) => state.verified);
+
     const sendingLoading = useEmailVerificationCode(
         (state) => state.sendingLoading
     );
     const verificationLoading = useEmailVerificationCode(
         (state) => state.verificationLoading
     );
-    const verified = useEmailVerificationCode((state) => state.verified);
     const sendCode = useEmailVerificationCode((state) => state.sendCode);
     const verifyCode = useEmailVerificationCode(
         (state) => state.verifyResetCode
@@ -45,9 +46,9 @@ export const EmailVerification: React.FC = () => {
                 withButton={!verified}
                 buttonProps={{
                     children: "Отправить",
-                    type: "button",
-                    onClick: onSendCode,
+                    type: "submit",
                     loading: sendingLoading,
+                    onClick: onSendCode,
                 }}
             />
             {sended && !verified && (
@@ -57,9 +58,9 @@ export const EmailVerification: React.FC = () => {
                     withButton={!verified}
                     buttonProps={{
                         children: "Подтвердить",
-                        type: "button",
-                        onClick: onVerifyEmail,
+                        type: "submit",
                         loading: verificationLoading,
+                        onClick: onVerifyEmail,
                     }}
                 />
             )}

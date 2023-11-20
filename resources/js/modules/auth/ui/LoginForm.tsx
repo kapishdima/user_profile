@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { AppRoutes } from "@/app/config/routes";
-import { Button } from "@/components/ui/button/index";
+import { Button, SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 import { CheckboxField, TextInput } from "@/components/ui/fields";
@@ -24,13 +23,14 @@ export const LoginForm: React.FC = () => {
             <Typography.Heading3 classes="text-center">
                 Войти
             </Typography.Heading3>
-            <Typography.Small classes="text-center mb-6">
+            <Typography.Small classes="text-center mb-6 text-slate-400">
                 Нет аккаунта?{" "}
-                <Button variant="link" className="p-0" asChild>
-                    <Link to={AppRoutes.PHONE_VERIFICATION}>
-                        Создать аккаунт
-                    </Link>
-                </Button>
+                <Typography.Link
+                    to={AppRoutes.PHONE_VERIFICATION}
+                    className="text-black font-medium"
+                >
+                    Создать аккаунт
+                </Typography.Link>
             </Typography.Small>
             <Form
                 handleSubmit={login}
@@ -40,18 +40,26 @@ export const LoginForm: React.FC = () => {
                 <TextInput
                     name="email"
                     label="Email"
+                    type="email"
                     placeholder="example@example.com"
                 />
                 <TextInput name="password" label="Пароль" type="password" />
                 <div className="flex items-center justify-between">
                     <CheckboxField name="remember" label="Запомнить меня" />
-                    <Link to={AppRoutes.VERIFY_RESET_CODE}>
-                        <Button variant="link">Забыли пароль? </Button>
-                    </Link>
+                    <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
+                        <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
+                            Забыли пароль?
+                        </Typography.Link>
+                    </Typography.Link>
                 </div>
-                <Button className="w-full" loading={loading} type="submit">
+                <SubmitButton
+                    className="w-full"
+                    loading={loading}
+                    type="submit"
+                >
                     Войти
-                </Button>
+                </SubmitButton>
+                <Typography.Terms />
             </Form>
         </div>
     );

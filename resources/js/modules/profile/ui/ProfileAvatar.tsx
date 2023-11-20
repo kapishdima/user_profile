@@ -30,7 +30,7 @@ export const ProfileAvatar: React.FC = () => {
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
                 <Avatar className="cursor-pointer">
-                    <AvatarImage src={profile.avatar.compressed_path} />
+                    <AvatarImage src={profile.avatar?.compressed_path} />
                     <AvatarFallback>{profileAvatarName}</AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>

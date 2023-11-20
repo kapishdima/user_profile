@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "./Input";
 import { Input as InputUI } from "../input";
 import { RootInputProps, InputControlProps } from "./types";
-import { Button, ButtonProps } from "../button/index";
+import { Button, ButtonProps, SubmitButton } from "../button/index";
 
 type TextInputProps = RootInputProps &
     InputControlProps & {
@@ -20,7 +20,7 @@ export const TextInput: React.FC<TextInputProps> = ({
     return (
         <Input name={name} label={label} description={description}>
             {({ field }) => (
-                <div className="flex w-full max-w-sm items-center space-x-2">
+                <div className="flex w-full items-center space-x-2">
                     <InputUI {...field} {...inputProps} />
                     {withButton && (
                         <Button {...buttonProps}>{buttonProps.children}</Button>
