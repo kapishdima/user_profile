@@ -100,7 +100,7 @@ export const SingUpPhoneVerificationForm: React.FC = () => {
                         disabled={
                             JSON.parse(
                                 window.localStorage.getItem(PHONE_RESEND_TIERS)
-                            ) <= 3
+                            ) < 3
                                 ? !verified
                                 : false
                         }

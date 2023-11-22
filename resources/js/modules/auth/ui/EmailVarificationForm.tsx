@@ -56,7 +56,7 @@ export const EmailVerificationForm: React.FC = () => {
                 Подтвержение электронной почты
             </Typography.Heading3>
             <Typography.Muted classes="text-left mb-6">
-                Пожалуйста введите 4 цифр, которые отправлены на почту
+                Пожалуйста введите 4 цифры, которые отправлены на почту
             </Typography.Muted>
             <Form
                 handleSubmit={onSubmit}
