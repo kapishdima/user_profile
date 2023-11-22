@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AppRoutes } from "@/app/config/routes";
-import { Button } from "@/components/ui/button/index";
+import { Button, SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 import { TextInput } from "@/components/ui/fields";
@@ -46,9 +46,9 @@ export const ResetPasswordForm: React.FC = () => {
                     label="Подтвердите пароль"
                     type="password"
                 />
-                <Button className="w-full" loading={loading} type="submit">
+                <SubmitButton className="w-full" loading={loading}>
                     Сохранить
-                </Button>
+                </SubmitButton>
             </Form>
         </div>
     );
