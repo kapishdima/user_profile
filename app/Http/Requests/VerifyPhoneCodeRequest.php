@@ -25,7 +25,7 @@ class VerifyPhoneCodeRequest extends FormRequest
     {
         return [
             "phone" => "required",
-            "code" => "required|numeric|max:9999|min:1000",
+            "code" => "required|numeric|max:9999",
         ];
     }
 }
