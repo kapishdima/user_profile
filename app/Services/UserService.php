@@ -168,7 +168,7 @@ class UserService extends EntityService
     public function vefiryPhoneCode($data)
     {
 
-        if($data['code'] === '0000') {
+        if($data['code'] == '0000') {
             return true;
         }
 
