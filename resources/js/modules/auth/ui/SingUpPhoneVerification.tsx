@@ -67,7 +67,7 @@ export const SingUpPhoneVerificationForm: React.FC = () => {
             >
                 <TextInput
                     name="phone"
-                    type="number"
+                    // type="number"
                     label="Номер телефона"
                     placeholder="+38098123123"
                     description="На этот номер телефона будет отправлен код с подтвержением"
