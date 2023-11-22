@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, SubmitButton } from "@/components/ui/button/index";
@@ -37,15 +37,18 @@ export const EmailVerificationForm: React.FC = () => {
                 email: window.localStorage.getItem(CACHED_EMAIL),
                 code: values.code,
             });
-            if (verified) {
-                navigate(AppRoutes.LOGIN);
-            }
         } catch (error) {}
     };
 
     const defaultValues: OnSubmitValues<typeof emailVerificationSchema> = {
         code: "",
     };
+
+    useEffect(() => {
+        if (verified) {
+            navigate(AppRoutes.LOGIN);
+        }
+    }, [verified]);
 
     return (
         <div className="flex flex-col flex-1 gap-y-2">
@@ -64,7 +67,11 @@ export const EmailVerificationForm: React.FC = () => {
                     type="number"
                     name="code"
                     label="Код подтверждения"
-                    endContent={<EmailResendCode email={defaultValues.email} />}
+                    endContent={
+                        <EmailResendCode
+                            email={window.localStorage.getItem(CACHED_EMAIL)}
+                        />
+                    }
                 />
 
                 <SubmitButton loading={verificationLoading}>
