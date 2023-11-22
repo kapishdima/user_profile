@@ -74,15 +74,19 @@ export const useAuthStore = create<AuthStore>((set) => ({
             }));
             const signupSuccess = await registerUser(request);
             window.localStorage.setItem(CACHED_EMAIL, request.email);
+
+            if (!signupSuccess) {
+                toast({
+                    variant: "destructive",
+                    title: "Такой email уже существует!",
+                });
+            }
+
             set(() => ({
                 signUpLoading: false,
                 signupSuccess,
             }));
         } catch (error) {
-            toast({
-                variant: "destructive",
-                title: "Такой email уже существует!",
-            });
             console.error(error);
         }
     },
