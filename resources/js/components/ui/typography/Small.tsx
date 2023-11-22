@@ -8,7 +8,7 @@ export const Small: React.FC<React.PropsWithChildren<TypographyProps>> = ({
     classes,
 }) => {
     return (
-        <p className={classNames("text-sm font-normal leading-none", classes)}>
+        <p className={classNames("text-sm font-medium leading-none", classes)}>
             {children}
         </p>
     );

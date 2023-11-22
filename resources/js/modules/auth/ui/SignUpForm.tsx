@@ -37,7 +37,7 @@ export const SignUpForm: React.FC = () => {
             <Typography.Heading3 classes="text-center">
                 Создать аккаунт
             </Typography.Heading3>
-            <Typography.Small classes="text-center mb-6 text-slate-400">
+            <Typography.Small classes="text-center mb-6">
                 Уже есть аккаунт?{" "}
                 <Typography.Link
                     to={AppRoutes.LOGIN}

@@ -23,7 +23,7 @@ export const LoginForm: React.FC = () => {
             <Typography.Heading3 classes="text-center">
                 Войти
             </Typography.Heading3>
-            <Typography.Small classes="text-center mb-6 text-slate-400">
+            <Typography.Small classes="text-center mb-6">
                 Нет аккаунта?{" "}
                 <Typography.Link
                     to={AppRoutes.PHONE_VERIFICATION}
@@ -44,17 +44,6 @@ export const LoginForm: React.FC = () => {
                     placeholder="example@example.com"
                 />
                 <TextInput name="password" label="Пароль" type="password" />
-                <div className="flex items-center justify-between">
-                    <CheckboxField name="remember" label="Запомнить меня" />
-                    <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
-                        <Typography.Link
-                            to={AppRoutes.VERIFY_RESET_CODE}
-                            className="text-sm font-normal leading-none"
-                        >
-                            Забыли пароль?
-                        </Typography.Link>
-                    </Typography.Link>
-                </div>
                 <SubmitButton
                     className="w-full"
                     loading={loading}
@@ -62,6 +51,18 @@ export const LoginForm: React.FC = () => {
                 >
                     Войти
                 </SubmitButton>
+                <div className="flex items-center justify-between">
+                    <CheckboxField name="remember" label="Запомнить меня" />
+                    <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
+                        <Typography.Link
+                            to={AppRoutes.VERIFY_RESET_CODE}
+                            className="text-sm font-medium leading-none"
+                        >
+                            Забыли пароль?
+                        </Typography.Link>
+                    </Typography.Link>
+                </div>
+
                 <Typography.Terms />
             </Form>
         </div>

@@ -10,12 +10,12 @@ export const ResetPasswordSuccess: React.FC = () => {
                 <Typography.Heading3 classes="text-left">
                     Пароль сброшен
                 </Typography.Heading3>
-                <Typography.Small classes="text-center mb-6 text-slate-400">
+                <Typography.Small classes="text-center mb-6">
                     Вы успешно сбросили свой пароль!
                 </Typography.Small>
 
                 <div className="">
-                    <Typography.Small classes="text-center mb-6 text-slate-400">
+                    <Typography.Small classes="text-center mb-6">
                         Теперь вы можете{" "}
                         <Typography.Link
                             to={AppRoutes.LOGIN}
