@@ -23,7 +23,7 @@ export const LoginForm: React.FC = () => {
             <Typography.Heading3 classes="text-center">
                 Войти
             </Typography.Heading3>
-            <Typography.Small classes="text-center mb-6">
+            <Typography.Muted classes="text-center mb-6">
                 Нет аккаунта?{" "}
                 <Typography.Link
                     to={AppRoutes.PHONE_VERIFICATION}
@@ -31,7 +31,7 @@ export const LoginForm: React.FC = () => {
                 >
                     Создать аккаунт
                 </Typography.Link>
-            </Typography.Small>
+            </Typography.Muted>
             <Form
                 handleSubmit={login}
                 defaultValues={defaultValues}
