@@ -43,9 +43,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if (auth('api')->user()) {
-            auth('api')->user()->tokens()->delete();
-        }
+        $request->user()->currentAccessToken()->delete();
 
         return [
             'message' => 'Logged out',
@@ -97,16 +95,15 @@ class AuthController extends Controller
         $data = $request->validated();
         $isValid = $this->userService->verifyEmailCode($data);
 
-        $user = User::where('email', $data['email'])->first();
-        $this->userService->update(["phone" => $data["phone"]], $user->id);
-
         if (!$isValid) {
-
             return response()->json([
                 'success' => false,
                 'message' => 'Code is invalid',
             ], 401);
         }
+
+        $user = User::where('email', $data['email'])->first();
+        $this->userService->update(["phone" => $data["phone"]], $user->id);
 
         return response()->json([
             'success' => true,

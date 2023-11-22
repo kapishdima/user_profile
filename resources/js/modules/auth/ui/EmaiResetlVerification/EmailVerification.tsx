@@ -54,6 +54,7 @@ export const EmailVerification: React.FC = () => {
             {sended && !verified && (
                 <TextInput
                     name="code"
+                    type="number"
                     label="Код подтверждения"
                     withButton={!verified}
                     buttonProps={{

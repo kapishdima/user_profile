@@ -4,7 +4,10 @@ import {
     verifyEmailCode,
     verifyResetCode,
 } from "../api/auth.api";
-import { VerificationEmailCode } from "../model/email-verification";
+import {
+    SendEmailCodeRequest,
+    VerificationEmailCode,
+} from "../model/email-verification";
 import { toast } from "@/components/ui/use-toast";
 import { CACHED_EMAIL } from "@/app/constants/storage";
 
@@ -24,7 +27,7 @@ export const useEmailVerificationCode = create<EmailVerificationStore>(
         verificationLoading: false,
         sended: false,
         verified: false,
-        sendCode: async (request: VerificationEmailCode) => {
+        sendCode: async (request: SendEmailCodeRequest) => {
             set(() => ({ sendingLoading: true }));
             const sended = await sendVerificationEmailCode(request);
             if (!sended) {

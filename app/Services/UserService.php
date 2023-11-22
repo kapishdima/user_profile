@@ -6,7 +6,6 @@ use App\Models\OneTimeEmailCode;
 use App\Models\OneTimePhoneCode;
 use App\Models\User;
 use App\Notifications\SendEmailVerificationCode;
-use App\Notifications\SendPhoneVerificationCode;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
@@ -17,7 +16,8 @@ class UserService extends EntityService
 
     public function __construct(
         protected UploadService $uploadService,
-        protected MediaService $mediaService
+        protected MediaService $mediaService,
+        protected SmsService $smsService
     ) {
     }
 
@@ -104,19 +104,14 @@ class UserService extends EntityService
 
     public function resendEmailCode($data)
     {
-        $user = User::where('email', $data['email'])->first();
-
-        if (!$user) {
-            return false;
-        }
 
         $oneTimeCode = OneTimeEmailCode::create([
-            'email' => $user->email,
+            'email' => $data["email"],
             'code' => rand(1000, 9999),
             'expires_at' => now()->addMinutes(60),
         ]);
 
-        Notification::route('mail', $user->email)
+        Notification::route('mail', $data["email"])
             ->notify(new SendEmailVerificationCode($oneTimeCode));
 
         return true;
@@ -145,7 +140,7 @@ class UserService extends EntityService
 
         $oneTimeCode->delete();
 
-        return $user;
+        return true;
     }
 
     public function sendPhoneCode($data)
@@ -162,10 +157,12 @@ class UserService extends EntityService
             'expires_at' => now()->addMinutes(60),
         ]);
 
-        Notification::route('vonage', $phone)
-            ->notify(new SendPhoneVerificationCode($oneTimeCode));
+        $success = $this->smsService->sendSms(["phone" => $phone, "code" => $oneTimeCode->code]);
 
-        return;
+        // Notification::route('vonage', $phone)
+        //     ->notify(new SendPhoneVerificationCode($oneTimeCode));
+
+        return $success;
     }
 
     public function vefiryPhoneCode($data)

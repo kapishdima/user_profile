@@ -28,6 +28,8 @@ export const Form: React.FC<React.PropsWithChildren<FormProps>> = ({
         handleSubmit(values);
     };
 
+    console.log(form.getValues());
+
     return (
         <FormUI {...form}>
             <form

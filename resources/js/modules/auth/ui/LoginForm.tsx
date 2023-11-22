@@ -1,7 +1,7 @@
 import React from "react";
 
 import { AppRoutes } from "@/app/config/routes";
-import { Button, SubmitButton } from "@/components/ui/button/index";
+import { SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 import { CheckboxField, TextInput } from "@/components/ui/fields";
@@ -47,7 +47,10 @@ export const LoginForm: React.FC = () => {
                 <div className="flex items-center justify-between">
                     <CheckboxField name="remember" label="Запомнить меня" />
                     <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
-                        <Typography.Link to={AppRoutes.VERIFY_RESET_CODE}>
+                        <Typography.Link
+                            to={AppRoutes.VERIFY_RESET_CODE}
+                            className="text-sm font-normal leading-none"
+                        >
                             Забыли пароль?
                         </Typography.Link>
                     </Typography.Link>

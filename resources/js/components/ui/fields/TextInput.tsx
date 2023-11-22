@@ -15,13 +15,19 @@ export const TextInput: React.FC<TextInputProps> = ({
     description,
     withButton,
     buttonProps,
+    endContent,
     ...inputProps
 }) => {
     return (
         <Input name={name} label={label} description={description}>
             {({ field }) => (
                 <div className="flex w-full items-center space-x-2">
-                    <InputUI {...field} {...inputProps} />
+                    <div className="relative flex flex-1 items-center">
+                        <InputUI {...field} {...inputProps} />
+                        {endContent && (
+                            <div className="absolute right-4">{endContent}</div>
+                        )}
+                    </div>
                     {withButton && (
                         <Button {...buttonProps}>{buttonProps.children}</Button>
                     )}

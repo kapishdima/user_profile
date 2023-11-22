@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoutes } from "@/app/config/routes";
-import { Button } from "@/components/ui/button/index";
+import { Button, SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 import { CheckboxField, TextInput } from "@/components/ui/fields";
@@ -11,15 +11,13 @@ import { signupSchame } from "../validation/schema";
 import { useAuthStore } from "../store/auth.store";
 
 const defaultValues: OnSubmitValues<typeof signupSchame> = {
-    first_name: "",
-    last_name: "",
     email: "",
     password: "",
     passwordConfirmation: "",
 };
 
 export const SignUpForm: React.FC = () => {
-    const loading = useAuthStore((state) => state.loading);
+    const loading = useAuthStore((state) => state.signUpLoading);
     const register = useAuthStore((state) => state.register);
     const navigate = useNavigate();
 
@@ -47,30 +45,34 @@ export const SignUpForm: React.FC = () => {
                 defaultValues={defaultValues}
                 schema={signupSchame}
             >
-                <TextInput name="first_name" label="Имя" placeholder="Иван" />
-                <TextInput
-                    name="last_name"
-                    label="Фамилия"
-                    placeholder="Иванович"
-                />
                 <TextInput
                     name="email"
                     label="Почта"
                     placeholder="example@example.com"
                 />
-                <TextInput name="password" label="Пароль" type="password" />
                 <TextInput
+                    name="password"
+                    label="Пароль"
+                    type="password"
+                    description="Пароль должен содержать минимум 8 символов"
+                />
+                <TextInput
+                    type="password"
                     name="passwordConfirmation"
                     label="Подтвердите пароль"
                 />
 
                 <CheckboxField
-                    name="remember"
-                    label="Своей регистрацией вы подтверждаете и автоматически принимаете Условия пользователького соглашения"
+                    name="terms_confirmed"
+                    label="Я согласен с правилами сайта"
                 />
-                <Button className="w-full" type="submit" loading={loading}>
+                <SubmitButton
+                    className="w-full"
+                    type="submit"
+                    loading={loading}
+                >
                     Создать аккаунт
-                </Button>
+                </SubmitButton>
                 <Typography.Terms />
             </Form>
         </div>

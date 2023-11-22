@@ -16,6 +16,7 @@ import { toast } from "@/components/ui/use-toast";
 
 type AuthStore = {
     loading: boolean;
+    signUpLoading: boolean;
     resetLoading: boolean;
     loginLoading: boolean;
     isAuth: boolean;
@@ -28,6 +29,7 @@ type AuthStore = {
 
 export const useAuthStore = create<AuthStore>((set) => ({
     loading: false,
+    signUpLoading: false,
     resetLoading: false,
     loginLoading: false,
     isAuth: false,
@@ -66,12 +68,12 @@ export const useAuthStore = create<AuthStore>((set) => ({
     register: async (request: SignupRequest) => {
         try {
             set(() => ({
-                loading: true,
+                signUpLoading: true,
             }));
             await registerUser(request);
             window.localStorage.setItem(CACHED_EMAIL, request.email);
             set(() => ({
-                loading: false,
+                signUpLoading: false,
             }));
         } catch (error) {
             console.error(error);

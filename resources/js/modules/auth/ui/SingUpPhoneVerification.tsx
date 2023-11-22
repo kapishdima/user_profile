@@ -9,6 +9,8 @@ import { TextInput } from "@/components/ui/fields";
 
 import { phoneVerificationSchema } from "../validation/schema";
 import { usePhoneVerificationCode } from "../store/phone-verification.store";
+import { PhoneResendCode } from "./PhoneResendCode";
+import { PHONE_RESEND_TIERS } from "@/app/constants/storage";
 
 const defaultValues: OnSubmitValues<typeof phoneVerificationSchema> = {
     phone: "",
@@ -33,6 +35,17 @@ export const SingUpPhoneVerificationForm: React.FC = () => {
         navigate(AppRoutes.SIGNUP);
     };
 
+    console.log("!verified", !verified);
+    console.log(JSON.parse(window.localStorage.getItem(PHONE_RESEND_TIERS)));
+    console.log(
+        "tiers",
+        JSON.parse(window.localStorage.getItem(PHONE_RESEND_TIERS)) < 3
+    );
+    console.log(
+        !verified ||
+            JSON.parse(window.localStorage.getItem(PHONE_RESEND_TIERS)) < 3
+    );
+
     return (
         <div className="flex flex-col flex-1 gap-y-2">
             <Typography.Heading3 classes="text-center">
@@ -54,9 +67,11 @@ export const SingUpPhoneVerificationForm: React.FC = () => {
             >
                 <TextInput
                     name="phone"
+                    type="number"
                     label="Номер телефона"
                     placeholder="+38098123123"
                     description="На этот номер телефона будет отправлен код с подтвержением"
+                    endContent={<PhoneResendCode />}
                 />
                 {sended && (
                     <TextInput
@@ -82,7 +97,13 @@ export const SingUpPhoneVerificationForm: React.FC = () => {
                 ) : (
                     <SubmitButton
                         className="w-full"
-                        disabled={!verified}
+                        disabled={
+                            JSON.parse(
+                                window.localStorage.getItem(PHONE_RESEND_TIERS)
+                            ) <= 3
+                                ? !verified
+                                : false
+                        }
                         type="button"
                         onClick={onVerifiedSuccess}
                     >

@@ -16,11 +16,17 @@ export const CheckboxField: React.FC<CheckboxFieldProps> = ({
             name={name}
             label={label}
             description={description}
-            formItemClasses="flex flex-row-reverse items-center space-y-0 gap-x-2 font-regular"
+            formItemClasses="flex flex-row-reverse justify-end items-center space-y-0 gap-x-2 font-regular"
             formLabelClasses="font-normal text-sm"
         >
             {({ field }) => (
-                <CheckboxUI {...field} {...inputProps} className="space-y-0" />
+                <CheckboxUI
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                    {...field}
+                    {...inputProps}
+                    className="space-y-0"
+                />
             )}
         </Input>
     );

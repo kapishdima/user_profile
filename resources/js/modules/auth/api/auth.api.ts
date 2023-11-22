@@ -3,7 +3,10 @@ import { Storage } from "app/constants";
 import { LoginRequest, LoginResponse } from "../model/login";
 import { SignupRequest, SignupResponse } from "../model/sing-up";
 import { VerificationPhoneCode } from "../model/phone-verification";
-import { VerificationEmailCode } from "../model/email-verification";
+import {
+    SendEmailCodeRequest,
+    VerificationEmailCode,
+} from "../model/email-verification";
 import { ResetPasswordRequest } from "../model/reset-password";
 
 export const login = async (
@@ -85,7 +88,7 @@ export const verifyPhoneCode = async (request: VerificationPhoneCode) => {
 };
 
 export const sendVerificationEmailCode = async (
-    request: VerificationEmailCode
+    request: SendEmailCodeRequest
 ) => {
     try {
         const { data } = await client.post<JsonResponse>(

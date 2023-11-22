@@ -4,7 +4,10 @@ import { Button, SubmitButton } from "@/components/ui/button/index";
 import { Typography } from "@/components/ui/typography";
 import { Form, OnSubmitValues } from "@/components/ui/form/index";
 
-import { emailVerificationSchema } from "../../validation/schema";
+import {
+    emailVerificationSchema,
+    codeVerificationSchema,
+} from "../../validation/schema";
 import { EmailVerification } from "./EmailVerification";
 import { useNavigate } from "react-router-dom";
 import { AppRoutes } from "@/app/config/routes";
@@ -28,17 +31,16 @@ export const EmailVerificationResetForm: React.FC = () => {
             <Form
                 handleSubmit={() => {}}
                 defaultValues={defaultValues}
-                schema={emailVerificationSchema}
+                schema={codeVerificationSchema}
             >
                 <EmailVerification />
 
-                <Button
-                    disabled={!sended}
+                <SubmitButton
                     type="button"
                     onClick={() => navigate(AppRoutes.RESET_PASSWORD)}
                 >
                     Продолжить
-                </Button>
+                </SubmitButton>
             </Form>
         </div>
     );

@@ -3,3 +3,7 @@ export type VerificationEmailCode = {
     phone?: string;
     code?: string;
 };
+
+export type SendEmailCodeRequest = {
+    email?: string;
+};
