@@ -7,7 +7,7 @@ export const AuthLayout: React.FC<React.PropsWithChildren> = ({ children }) => {
         <RootLayout>
             <div className="md:flex-row flex-col flex items-center rounded-xl overflow-hidden w-full ">
                 <div className="lg:flex hidden w-full h-full lg:w-2/4 relative flex-col p-10 text-white dark:border-r bg-black">
-                    <div className="w-full h-full lg:w-2/4 relative flex text-white dark:border-r bg-black">
+                    <div className="w-full lg:w-2/4 relative flex items-center gap-x-4 text-white dark:border-r bg-black">
                         <svg
                             width="39"
                             height="39"
