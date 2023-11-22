@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { TextInput } from "@/components/ui/fields";
 import { useEmailVerificationCode } from "@/modules/auth";
 import { useFormContext } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { ApiRoutes } from "@/app/http";
 
 export const EmailVerification: React.FC = () => {
     const form = useFormContext();
+    const navigate = useNavigate();
 
     const sended = useEmailVerificationCode((state) => state.sended);
     const verified = useEmailVerificationCode((state) => state.verified);
@@ -31,6 +34,12 @@ export const EmailVerification: React.FC = () => {
     const onVerifyEmail = () => {
         verifyCode({ email, code: codeVerification });
     };
+
+    useEffect(() => {
+        if (verified) {
+            navigate(ApiRoutes.RESET_PASSWORD);
+        }
+    }, [verified]);
 
     return (
         <>
