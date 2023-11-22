@@ -20,6 +20,7 @@ type AuthStore = {
     resetLoading: boolean;
     loginLoading: boolean;
     isAuth: boolean;
+    signupSuccess: boolean;
     login: (request: LoginRequest) => void;
     logout: () => void;
     checkAuth: () => void;
@@ -33,6 +34,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
     resetLoading: false,
     loginLoading: false,
     isAuth: false,
+    signupSuccess: false,
     cachedPhone: "",
     checkAuth: async () => {
         set(() => ({ loading: true }));
@@ -70,12 +72,17 @@ export const useAuthStore = create<AuthStore>((set) => ({
             set(() => ({
                 signUpLoading: true,
             }));
-            await registerUser(request);
+            const signupSuccess = await registerUser(request);
             window.localStorage.setItem(CACHED_EMAIL, request.email);
             set(() => ({
                 signUpLoading: false,
+                signupSuccess,
             }));
         } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Такой email уже существует!",
+            });
             console.error(error);
         }
     },

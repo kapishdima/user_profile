@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AppRoutes } from "@/app/config/routes";
@@ -19,12 +19,18 @@ const defaultValues: OnSubmitValues<typeof signupSchame> = {
 export const SignUpForm: React.FC = () => {
     const loading = useAuthStore((state) => state.signUpLoading);
     const register = useAuthStore((state) => state.register);
+    const signupSuccess = useAuthStore((state) => state.signupSuccess);
     const navigate = useNavigate();
 
     const onSubmit = async (values: OnSubmitValues<typeof signupSchame>) => {
         await register(values);
-        navigate(AppRoutes.EMAIL_VARIFICATION);
     };
+
+    useEffect(() => {
+        if (signupSuccess) {
+            navigate(AppRoutes.EMAIL_VARIFICATION);
+        }
+    }, [signupSuccess]);
 
     return (
         <div className="flex flex-col flex-1 gap-y-2">
