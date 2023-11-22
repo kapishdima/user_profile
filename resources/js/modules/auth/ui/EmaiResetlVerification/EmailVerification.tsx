@@ -5,6 +5,7 @@ import { useEmailVerificationCode } from "@/modules/auth";
 import { useFormContext } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ApiRoutes } from "@/app/http";
+import { AppRoutes } from "@/app/config/routes";
 
 export const EmailVerification: React.FC = () => {
     const form = useFormContext();
@@ -37,7 +38,7 @@ export const EmailVerification: React.FC = () => {
 
     useEffect(() => {
         if (verified) {
-            navigate(ApiRoutes.RESET_PASSWORD);
+            navigate(AppRoutes.RESET_PASSWORD);
         }
     }, [verified]);
 
