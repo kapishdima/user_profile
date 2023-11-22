@@ -9,7 +9,7 @@ export const ProfileDocumentsList: React.FC = () => {
     }
 
     return (
-        <div className="flex items-center gap-x-2 py-8">
+        <div className="flex items-center gap-x-2 pb-8">
             {profile.documents?.map((document) => (
                 <div className="w-8 h-8 rounded-md overflow-hidden">
                     <img src={document.path} className="w-full h-full" />
